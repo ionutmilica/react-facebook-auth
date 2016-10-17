@@ -1,0 +1,59 @@
+{
+  "name": "react-fb-auth",
+  "version": "1.0.0",
+  "description": "A Component React for Facebook Login",
+  "main": "dist/react-fb-auth.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node_modules/.bin/webpack-dev-server --host=0.0.0.0 --port=8080 --config webpack.config.js",
+    "bundle": "cross-env NODE_ENV=production node_modules/.bin/webpack -p --config webpack.config.dist.js",
+    "test": "node_modules/.bin/eslint src/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionutmilica/react-fb-auth.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "facebook-auth",
+    "react-facebook-auth",
+    "react-component",
+    "facebook-login",
+    "react-facebook-login"
+  ],
+  "author": "Ionut Milica <ionut.milica@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ionutmilica/react-fb-auth/issues"
+  },
+  "homepage": "https://github.com/ionutmilica/react-fb-auth",
+  "devDependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "autoprefixer": "^6.0.3",
+
+    "babel": "^6.5.2",
+    "babel-core": "^6.6.5",
+    "babel-eslint": "^4.1.6",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^2.0.0",
+    "eslint-plugin-react": "^3.11.3",
+    "react-addons-test-utils": "^15.1.0",
+    "webpack": "1.12.x",
+    "webpack-dev-server": "1.12.x"
+  },
+  "peerDependencies": {
+    "react": "^15.1.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+  }
+}
