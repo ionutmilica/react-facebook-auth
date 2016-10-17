@@ -12,20 +12,20 @@ const propTypes = {
   fields: PropTypes.string,
   version: PropTypes.string,
   language: PropTypes.string,
+  btnType: PropTypes.string,
   btnText: PropTypes.string,
   btnClassName: PropTypes.string,
 };
 
 const defaultProps = {
-  textButton: 'Login with Facebook',
-  typeButton: 'button',
+  btnType: 'button',
+  btnText: 'Login with facebook',
+  btnClassName: '',
   scope: 'public_profile,email',
   xfbml: false,
   cookie: false,
   reAuthenticate: false,
-  size: 'metro',
   fields: 'name',
-  cssClass: 'kep-login-facebook',
   version: '2.3',
   language: 'en_US',
 };
@@ -139,7 +139,7 @@ class FacebookAuth extends React.Component {
 
     return (
         Component ? <Component onClick={this.click}/> :
-            <button type={btnType} className={btnClassName}>
+            <button type={btnType} className={btnClassName} onClick={this.click}>
               {btnText}
             </button>
     );

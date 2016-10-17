@@ -7,14 +7,14 @@ const response = (response) => {
 };
 
 const fbBtn = ({onClick}) => {
-  return <button onClick={onClick}>Login with facebook</button>
+  return <button onClick={onClick}>Login</button>
 };
 
 ReactDOM.render(
     <FacebookAuth
-        appId="1032595931187376"
-        fields="name,email,picture"
+        appId="532819646927525"
         component={fbBtn}
+        fields="name,email,picture"
         callback={response} />,
     document.getElementById('demo')
 );
