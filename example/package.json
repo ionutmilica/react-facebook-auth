@@ -1,0 +1,27 @@
+{
+  "name": "react-facebook-auth-example",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionutmilica/react-facebook-auth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ionutmilica/react-facebook-auth/issues"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --colors --content-base ./public --hot --inline"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-stage-1": "^6.24.1",
+    "html-webpack-plugin": "^2.28.0",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}

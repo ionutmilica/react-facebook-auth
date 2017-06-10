@@ -1,0 +1,14 @@
+language: node_js
+
+node_js:
+  - '8'
+
+cache:
+  yarn: true
+
+script:
+  - npm test
+
+after_success:
+  - npm run test:coverage
+  - npm run test:codecov
