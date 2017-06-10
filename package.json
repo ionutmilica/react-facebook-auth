@@ -1,16 +1,16 @@
 {
-  "name": "react-fb-auth",
+  "name": "react-facebook-auth",
   "version": "1.0.0",
-  "description": "A Component React for Facebook Login",
-  "main": "dist/react-fb-auth.js",
-  "scripts": {
-    "start": "cross-env NODE_ENV=development node_modules/.bin/webpack-dev-server --host=0.0.0.0 --port=8080 --config webpack.config.js",
-    "bundle": "cross-env NODE_ENV=production node_modules/.bin/webpack -p --config webpack.config.dist.js",
-    "test": "node_modules/.bin/eslint src/**/*.js"
-  },
+  "description": "A Component React for Facebook authentication",
+  "author": "Ionut Milica <ionut.milica@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/ionutmilica/react-facebook-auth",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionutmilica/react-fb-auth.git"
+    "url": "https://github.com/ionutmilica/react-facebook-auth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ionutmilica/react-facebook-auth/issues"
   },
   "keywords": [
     "react",
@@ -19,35 +19,61 @@
     "react-facebook-auth",
     "react-component",
     "facebook-login",
+    "login",
     "react-facebook-login"
   ],
-  "author": "Ionut Milica <ionut.milica@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ionutmilica/react-fb-auth/issues"
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "jsnext:main": "./es/index.js",
+  "scripts": {
+    "build": "npm run build:lib && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "build:lib": "babel src --out-dir lib --ignore __tests__",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore __tests__",
+    "build:umd": "cross-env NODE_ENV=development webpack src/index.js dist/react-facebook-auth.js --config config/webpack.dev.js",
+    "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/react-facebook-auth.min.js --config config/webpack.prod.js",
+    "lint": "eslint src",
+    "test": "cross-env NODE_ENV=test jest --config config/jest.config.js",
+    "test:coverage": "npm run test -- --coverage",
+    "test:codecov": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
+    "test:watch": "npm run test -- --watch --bail",
+    "prettier": "prettier --write --semi --single-quote --trailing-comma=all 'src/**/*.js'",
+    "clean": "rimraf dist lib es"
   },
-  "homepage": "https://github.com/ionutmilica/react-fb-auth",
   "devDependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "autoprefixer": "^6.0.3",
-
-    "babel": "^6.5.2",
-    "babel-core": "^6.6.5",
-    "babel-eslint": "^4.1.6",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-react": "^6.1.18",
-    "babel-preset-stage-0": "^6.5.0",
-    "eslint": "^1.10.3",
-    "eslint-config-airbnb": "^2.0.0",
-    "eslint-plugin-react": "^3.11.3",
-    "react-addons-test-utils": "^15.1.0",
-    "webpack": "1.12.x",
-    "webpack-dev-server": "1.12.x"
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.5",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "codecov": "^2.2.0",
+    "cross-env": "^5.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1",
+    "jest": "^20.0.4",
+    "prettier": "^1.4.4",
+    "rimraf": "^2.6.1",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "react": "^15.1.0"
+    "react": "^15.0.0"
   },
   "babel": {
     "presets": [

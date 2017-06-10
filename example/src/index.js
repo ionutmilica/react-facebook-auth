@@ -1,20 +1,3 @@
-# React Facebook Authentication
-
-Allows developers to receive a facebook authentication token that can be used by a backend service.
-
-## Installation
-To install the latest version:
-
-```
-npm install --save react-facebook-auth
-```
-or
-```
-yarn add react-facebook-auth
-```
-
-### How to use
-```js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FacebookAuth from 'react-facebook-auth';
@@ -34,7 +17,7 @@ const App = () => (
   <div>
     <h1>Facebook Auth</h1>
     <FacebookAuth
-      appId="<app-id>"
+      appId="532819646927525"
       callback={authenticate}
       component={MyFacebookButton}
     />
@@ -45,9 +28,3 @@ ReactDOM.render(
   <App />,
   document.getElementById('root'),
 );
-```
-
-A full example can be found in [examples](https://github.com/ionutmilica/react-facebook-auth/tree/master/example) directory.
-
-### License
-MIT

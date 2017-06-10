@@ -1,5 +1,8 @@
-node_modules/
 .idea
-.DS_store
-.module-cache
-npm-debug.log
+dist
+lib
+es
+coverage
+.coveralls.yml
+node_modules
+.DS_Store

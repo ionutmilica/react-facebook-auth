@@ -1,3 +1,1 @@
-import FacebookAuth from './FacebookAuth';
-
-export default FacebookAuth;
+export default from './facebook-auth';

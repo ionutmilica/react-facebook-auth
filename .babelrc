@@ -1,0 +1,19 @@
+{
+  "presets": [
+    "es2015",
+    "react",
+    "stage-1"
+  ],
+  "plugins": [
+    "babel-plugin-add-module-exports",
+    ["babel-plugin-transform-react-remove-prop-types", { "removeImport": true }],
+    "transform-object-rest-spread"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    }
+  }
+}
