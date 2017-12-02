@@ -18,6 +18,7 @@ class FacebookAuth extends React.Component {
     fields: PropTypes.string,
     version: PropTypes.string,
     language: PropTypes.string,
+    customProps: PropTypes.object
   };
   static defaultProps = {
     redirectUri: typeof window !== 'undefined' ? window.location.href : '/',
@@ -156,7 +157,7 @@ class FacebookAuth extends React.Component {
 
   render() {
     const { component: Component } = this.props;
-    return <Component onClick={this.click} />;
+    return <Component onClick={this.click} {...this.props.customProps} />;
   }
 }
 
