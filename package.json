@@ -55,22 +55,21 @@
     "babel-register": "^6.24.1",
     "codecov": "^2.2.0",
     "cross-env": "^5.0.0",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.0.1",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-import": "^2.3.0",
-    "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.0.1",
+    "eslint": "^4.1.1",
+    "eslint-config-react-app": "^2.0.1",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
-    "prettier": "^1.4.4",
+    "prettier": "^1.9.2",
     "rimraf": "^2.6.1",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5",
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.6.0"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0"

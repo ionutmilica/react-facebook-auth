@@ -52,5 +52,25 @@ ReactDOM.render(
 
 A full example can be found in [examples](https://github.com/ionutmilica/react-facebook-auth/tree/master/example) directory.
 
+### Available Props
+| Params          | Type     | Info                                                                                                                    |
+|-----------------|----------|-------------------------------------------------------------------------------------------------------------------------|
+| appId           | string   | Facebook application id. Check https://developers.facebook.com                                                          |
+| scope           | string   | Comma separated list of extended permissions                                                                            |
+| fields          | string   | name,email,picture                                                                                                      |
+| callback        | function | Callback triggered when we receive a response from facebook.                                                            |
+| onFailure       | function | If provided, will be triggered on failed requests.                                                                      |
+| returnScopes    | boolean  | When true, the granted scopes will be returned in a comma-separated list in the grantedScopes field of the authResponse |
+| autoLoad        | boolean  | Defaults to: false                                                                                                      |
+| xfbml           | boolean  | Defaults to: false                                                                                                      |
+| cookie          | boolean  | Defaults to: false                                                                                                      |
+| reAuthenticate  | boolean  | Asks the person to re-authenticate unconditionally. Defaults to: false                                                  |
+| reRequest       | boolean  | Asks the person again for revoked permissions. Defaults to: false                                                       |
+| redirectUri     | string   | Defaults to: '/'                                                                                                        |
+| version         | string   | Facebook SDK version. Defaults to: 2.8                                                                                  |
+| language        | string   | Defaults to: en_US                                                                                                      |
+| disableRedirect | boolean  | Defaults to: false                                                                                                      |
+| customProps     | object   | Allows custom props passing to the custom element.                                                                      |
+| component       | node     | Custom react element that returns a button element.                                                                     |
 ### License
 MIT

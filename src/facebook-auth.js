@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toQueryString, isMobile } from './utils';
+import { toQueryString, isMobile as isUsingMobile } from './utils';
 
 class FacebookAuth extends React.Component {
   static propTypes = {
     component: PropTypes.node.isRequired,
     callback: PropTypes.func.isRequired,
+    onFailure: PropTypes.func,
     appId: PropTypes.string.isRequired,
     xfbml: PropTypes.bool,
     cookie: PropTypes.bool,
@@ -14,24 +15,29 @@ class FacebookAuth extends React.Component {
     reAuthenticate: PropTypes.bool,
     disableRedirect: PropTypes.bool,
     scope: PropTypes.string,
+    returnScopes: PropTypes.bool,
     autoLoad: PropTypes.bool,
     fields: PropTypes.string,
     version: PropTypes.string,
     language: PropTypes.string,
-    customProps: PropTypes.object
+    customProps: PropTypes.object,
   };
   static defaultProps = {
     redirectUri: typeof window !== 'undefined' ? window.location.href : '/',
     scope: 'public_profile,email',
+    onFailure: undefined,
+    returnScopes: false,
     xfbml: false,
     cookie: false,
-    isMobile: isMobile(),
+    isMobile: isUsingMobile(),
     reAuthenticate: false,
-    fields: 'name',
+    reRequest: false,
+    fields: 'name,email,picture',
     version: '2.8',
     language: 'en_US',
     autoLoad: false,
     disableRedirect: false,
+    customProps: {},
   };
 
   componentDidMount() {
@@ -42,12 +48,11 @@ class FacebookAuth extends React.Component {
     this.setfbAsyncInit();
     this.loadSdkAsynchronously();
 
-    let fbRoot = document.getElementById('fb-root');
-    if (!fbRoot) {
-      fbRoot = document.createElement('div');
-      fbRoot.id = 'fb-root';
-
-      document.body.appendChild(fbRoot);
+    let rootElem = document.getElementById('fb-root');
+    if (!rootElem) {
+      rootElem = document.createElement('div');
+      rootElem.id = 'fb-root';
+      document.body.appendChild(rootElem);
     }
   }
 
@@ -61,7 +66,7 @@ class FacebookAuth extends React.Component {
         cookie,
       });
 
-      if (autoLoad || window.location.search.includes('facebookdirect')) {
+      if (autoLoad || window.location.search.indexOf('facebookdirect') !== -1) {
         window.FB.getLoginStatus(this.checkLoginAfterRefresh);
       }
     };
@@ -70,24 +75,22 @@ class FacebookAuth extends React.Component {
   loadSdkAsynchronously() {
     const language = this.props.language;
     ((d, s, id) => {
-      const element = d.getElementsByTagName(s)[0];
-      const fjs = element;
-      let js = element;
+      const fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
         return;
       }
-      js = d.createElement(s);
+      const js = d.createElement(s);
       js.id = id;
-      js.src = `//connect.facebook.net/${language}/all.js`;
+      js.src = `https://connect.facebook.net/${language}/sdk.js`;
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   }
 
-  responseApi = (authResponse) => {
+  responseApi = authResponse => {
     window.FB.api(
       '/me',
       { locale: this.props.language, fields: this.props.fields },
-      (me) => {
+      me => {
         this.props.callback({
           ...me,
           ...authResponse,
@@ -96,17 +99,19 @@ class FacebookAuth extends React.Component {
     );
   };
 
-  checkLoginState = (response) => {
+  checkLoginState = response => {
     if (response.authResponse) {
       this.responseApi(response.authResponse);
       return;
     }
-    if (this.props.callback) {
+    if (this.props.onFailure) {
+      this.props.onFailure({ status: response.status });
+    } else {
       this.props.callback({ status: response.status });
     }
   };
 
-  checkLoginAfterRefresh = (response) => {
+  checkLoginAfterRefresh = response => {
     if (response.status === 'unknown') {
       window.FB.login(
         loginResponse => this.checkLoginState(loginResponse),
@@ -117,30 +122,40 @@ class FacebookAuth extends React.Component {
     }
   };
 
-  click = () => {
+  click = e => {
     const {
       scope,
+      returnScopes,
       appId,
       onClick,
       reAuthenticate,
+      reRequest,
       redirectUri,
       disableRedirect,
       isMobile,
     } = this.props;
 
     if (typeof onClick === 'function') {
-      onClick();
+      onClick(e);
+      if (e.defaultPrevented) {
+        return;
+      }
     }
 
     const params = {
       client_id: appId,
       redirect_uri: redirectUri,
       state: 'facebookdirect',
+      return_scopes: returnScopes,
       scope,
     };
 
     if (reAuthenticate) {
       params.auth_type = 'reauthenticate';
+    }
+
+    if (reRequest) {
+      params.auth_type = 'rerequest';
     }
 
     if (isMobile && !disableRedirect) {
@@ -150,6 +165,7 @@ class FacebookAuth extends React.Component {
     } else {
       window.FB.login(this.checkLoginState, {
         scope,
+        return_scopes: returnScopes,
         auth_type: params.auth_type,
       });
     }
