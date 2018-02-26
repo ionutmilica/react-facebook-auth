@@ -18,12 +18,14 @@ module.exports = {
     }),
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         include: [__dirname, libSrc],
-        loader: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+        },
       },
     ],
   },

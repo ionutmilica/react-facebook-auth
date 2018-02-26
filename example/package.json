@@ -10,18 +10,20 @@
     "url": "https://github.com/ionutmilica/react-facebook-auth/issues"
   },
   "scripts": {
-    "start": "webpack-dev-server --colors --content-base ./public --hot --inline"
+    "start": "webpack-dev-server --mode development --colors --content-base ./public --hot --inline",
+    "prettier": "prettier --write --semi --single-quote --trailing-comma=all 'src/**/*.{js,jsx,json,css}'"
   },
   "dependencies": {
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
     "babel-preset-stage-1": "^6.24.1",
-    "html-webpack-plugin": "^2.28.0",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
+    "prettier": "^1.10.2",
+    "webpack": "^4.0.0",
+    "webpack-dev-server": "^3.0.0"
   }
 }

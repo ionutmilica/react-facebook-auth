@@ -21,7 +21,7 @@ const MyFacebookButton = ({ onClick, styles }) => (
   </button>
 );
 
-const authenticate = (response) => {
+const authenticate = response => {
   console.log(response);
 };
 
@@ -37,7 +37,4 @@ const App = () => (
   </div>
 );
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root'),
-);
+ReactDOM.render(<App />, document.getElementById('root'));
